@@ -6,7 +6,7 @@ public class Main {
         System.out.println("Hello world!");
 
         Scanner input = new Scanner(System.in);
-        System.out.println("What are you pierdoling: ");
+        System.out.println("Enter the command: ");
         String command = input.nextLine();
 
 

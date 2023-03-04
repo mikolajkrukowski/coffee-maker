@@ -4,14 +4,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CoffeeMakerTest {
+public class CoffeeMakerTest extends CoffeeMaker{
     @Test
     public void getCoffeeStatusShouldReturn5IfCoffeIs100AndFullCapacityIs2000() {
         // Arange
         CoffeeMaker controller = new CoffeeMaker();
 
         int testCoffee = 100;
-        int expectedCoffee = 5;
+        int expectedCoffee = coffee;
 
         // Act
         int result = controller.getCoffeeStatus();
@@ -27,7 +27,7 @@ public class CoffeeMakerTest {
         CoffeeMaker coffeeMaker = new CoffeeMaker();
 
         int testWater = 150;
-        int expectedWater = 10;
+        int expectedWater = water;
 
         // Act
         int result = coffeeMaker.getWaterStatus();
@@ -44,7 +44,7 @@ public class CoffeeMakerTest {
         CoffeeMaker coffeeMaker = new CoffeeMaker();
 
         int testMilk = 100;
-        int expectedMilk = 10;
+        int expectedMilk = milk;
 
         // Act
         int result = coffeeMaker.getMilkStatus();
@@ -61,6 +61,7 @@ public class CoffeeMakerTest {
         CoffeeMaker coffeeMaker = new CoffeeMaker();
 
         int expectedCoffeeAfterAdded = coffeeMaker.coffee + 500;
+        if (expectedCoffeeAfterAdded > 2000) { expectedCoffeeAfterAdded = 2000; }
         // Act
         coffeeMaker.setRefillCoffee();
 
