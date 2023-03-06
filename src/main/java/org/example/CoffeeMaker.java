@@ -18,7 +18,7 @@ public class CoffeeMaker {
         this.milk = random.nextInt(maxMilk);
     }
 
-    public void switcher(String command) {
+    public void switcher(String command) throws InterruptedException {
 
         switch(command) {
             case "Hello":
@@ -32,11 +32,18 @@ public class CoffeeMaker {
                 break;
 
             case "Make coffee":
-
+                makeCoffeeGriding();
+                makeHeatingWater();
+                makePouringWater170ml();
+                makePouringWater30ml();
                 break;
 
             case "Make white coffee":
-
+                makeCoffeeGriding();
+                makeHeatingWater();
+                makePouringWater170ml();
+                makePouringWater30ml();
+                makePouringMilk50ml();
                 break;
 
             case "Refill coffee":
@@ -52,7 +59,10 @@ public class CoffeeMaker {
                 break;
 
             case "Exit":
+                System.out.println("Break");
+                break;
 
+            case "q":
                 break;
 
         }
@@ -76,11 +86,70 @@ public class CoffeeMaker {
 
     protected void setRefillCoffee() {
         coffee += 500;
+        if (coffee > 2000) {coffee = 2000;}
     }
     protected void setRefillWater() {
         water += 500;
+        if (water > 1500) {water = 1500;}
     }
+
     protected void setRefillMilk() {
         milk += 500;
+        if (milk > 1000) {milk = 1000;}
     }
+
+
+    protected void makeCoffeeGriding() throws InterruptedException {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Grinding...");
+            Thread.sleep(1000);
+        }
+        coffee -= 11;
+    }
+
+    protected void makeHeatingWater() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Heating water...");
+            Thread.sleep(1000);
+        }
+    }
+
+    protected void makePouringWater170ml() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Pouring water...");
+            Thread.sleep(1000);
+        }
+        water -= 170;
+    }
+
+    protected void makePouringWater30ml() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Pouring water...");
+            Thread.sleep(1000);
+        }
+        water -= 30;
+    }
+
+    protected void makePouringMilk50ml() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Pouring milk...");
+            Thread.sleep(1000);
+        }
+        milk -= 50;
+    }
+
+    protected void checkIngredients() {
+        if (coffee < 11) {
+            System.out.println("Not enough coffee.");
+            }
+        if (water < 170) {
+            System.out.println("Not enough water.");
+        }
+        if (milk < 50) {
+            System.out.println("Not enough milk.");
+        }
+        }
+
+
+
 }
