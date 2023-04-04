@@ -2,12 +2,12 @@ package org.example;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Hello world!");
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
+        coffeeMaker.run();
 
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the command: ");
-        String command = input.nextLine();
+
 
 
     }

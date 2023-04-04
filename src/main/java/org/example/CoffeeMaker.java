@@ -1,6 +1,8 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 public class CoffeeMaker {
 
@@ -18,7 +20,14 @@ public class CoffeeMaker {
         this.milk = random.nextInt(maxMilk);
     }
 
-    public void switcher(String command) throws InterruptedException {
+    public void run() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the command: ");
+        String command = input.nextLine();
+        switcher(command);
+    }
+
+    public void switcher(String command) {
 
         switch(command) {
             case "Hello":
@@ -36,6 +45,7 @@ public class CoffeeMaker {
                 makeHeatingWater();
                 makePouringWater170ml();
                 makePouringWater30ml();
+                checkIngredients();
                 break;
 
             case "Make white coffee":
@@ -44,6 +54,7 @@ public class CoffeeMaker {
                 makePouringWater170ml();
                 makePouringWater30ml();
                 makePouringMilk50ml();
+                checkIngredients();
                 break;
 
             case "Refill coffee":
@@ -59,12 +70,11 @@ public class CoffeeMaker {
                 break;
 
             case "Exit":
-                System.out.println("Break");
+                System.out.println("Bye");
                 break;
 
             case "q":
                 break;
-
         }
     }
 
@@ -99,41 +109,41 @@ public class CoffeeMaker {
     }
 
 
-    protected void makeCoffeeGriding() throws InterruptedException {
+    protected void makeCoffeeGriding() {
         for (int i = 0; i < 5; i++) {
             System.out.println("Grinding...");
-            Thread.sleep(1000);
+            waitingTime(1);
         }
         coffee -= 11;
     }
 
-    protected void makeHeatingWater() throws InterruptedException {
+    protected void makeHeatingWater() {
         for (int i = 0; i < 3; i++) {
             System.out.println("Heating water...");
-            Thread.sleep(1000);
+            waitingTime(1);
         }
     }
 
-    protected void makePouringWater170ml() throws InterruptedException {
+    protected void makePouringWater170ml() {
         for (int i = 0; i < 3; i++) {
             System.out.println("Pouring water...");
-            Thread.sleep(1000);
+            waitingTime(1);
         }
         water -= 170;
     }
 
-    protected void makePouringWater30ml() throws InterruptedException {
+    protected void makePouringWater30ml() {
         for (int i = 0; i < 3; i++) {
             System.out.println("Pouring water...");
-            Thread.sleep(1000);
+            waitingTime(1);
         }
         water -= 30;
     }
 
-    protected void makePouringMilk50ml() throws InterruptedException {
+    protected void makePouringMilk50ml() {
         for (int i = 0; i < 3; i++) {
             System.out.println("Pouring milk...");
-            Thread.sleep(1000);
+            waitingTime(1);
         }
         milk -= 50;
     }
@@ -141,15 +151,22 @@ public class CoffeeMaker {
     protected void checkIngredients() {
         if (coffee < 11) {
             System.out.println("Not enough coffee.");
-            }
+        }
         if (water < 170) {
             System.out.println("Not enough water.");
         }
         if (milk < 50) {
             System.out.println("Not enough milk.");
         }
-        }
+    }
 
+    protected void waitingTime(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }
